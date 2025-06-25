@@ -14,6 +14,7 @@ import {
 	getBinaryNodeChildren,
 	getBinaryNodeChildString,
 	jidEncode,
+	isLidUser,
 	jidNormalizedUser
 } from '../WABinary'
 import { makeChatsSocket } from './chats'
@@ -349,6 +350,7 @@ export const extractGroupMetadata = (result: BinaryNode) => {
 			return {
 				id: attrs.jid,
 				jid: attrs.phone_number ? jidNormalizedUser(attrs.phone_number) : undefined,
+				lid: isLidUser(attrs.jid) ? attrs.jid : attrs.lid,
 				admin: (attrs.type || null) as GroupParticipant['admin']
 			}
 		}),
